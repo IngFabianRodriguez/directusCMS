@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: directus
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: directus
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        io.kompose.network/directus: "true"
+        io.kompose.service: directus
+    spec:
+      containers:
+      - env:
+        - name: ADMIN_EMAIL
+          value: hector.rodriguez@fractalia.es
+        - name: ADMIN_PASSWORD
+          value: d1r3ctu5
+        - name: CACHE_ENABLED
+          value: "true"
+        - name: CACHE_REDIS
+          value: redis://cache:6379
+        - name: CACHE_STORE
+          value: redis
+        - name: CACHE_AUTO_PURGE
+          value: "true"
+        - name: CACHE_TTL
+          value: "1h"
+        - name: DB_CLIENT
+          value: pg
+        - name: DB_DATABASE
+          value: directus
+        - name: DB_HOST
+          value: database
+        - name: DB_PASSWORD
+          value: directus
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: directus
+        - name: KEY
+          value: 255d861b-5ea1-5996-9aa3-922530ec40b1
+        - name: SECRET
+          value: 6116487b-cda1-52c2-b5b5-c8022c45e263
+        image: directus/directus:v9.0.0-rc.24
+        imagePullPolicy: "IfNotPresent"
+        name: directus
+        ports:
+        - containerPort: 8055
+        resources: {}
+        volumeMounts:
+          - mountPath: /directus/uploads
+            name: directus
+      volumes:
+        - name: directus
+          persistentVolumeClaim:
+            claimName: directus-pvc-directus
+      restartPolicy: Always
+      serviceAccountName: ""
+
