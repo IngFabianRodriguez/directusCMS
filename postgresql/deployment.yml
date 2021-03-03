@@ -24,9 +24,15 @@ spec:
             - configMapRef:
                 name: postgres-config
           volumeMounts:
-            - mountPath: /var/lib/postgres/data
+            - mountPath: /var/lib/postgresql/data
               name: postgresdb
       volumes:
         - name: postgresdb
           persistentVolumeClaim:
             claimName: postgresql-pvc-directus
+
+
+
+# # sudo mkdir /var/lib/postgres
+# sudo chmod 775 /var/lib/postgres
+# sudo chown postgres /var/lib/postgres
