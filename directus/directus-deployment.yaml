@@ -16,6 +16,7 @@ spec:
     spec:
       containers:
       - env:
+        # # AKS ELK
         - name: ADMIN_EMAIL
           value: hector.rodriguez@fractalia.es
         - name: ADMIN_PASSWORD
