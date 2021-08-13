@@ -18,9 +18,9 @@ spec:
       - env:
         # # AKS ELK
         - name: ADMIN_EMAIL
-          value: hector.rodriguez@fractalia.es
+          value: <email@email.com>
         - name: ADMIN_PASSWORD
-          value: d1r3ctu5
+          value: <password>
         - name: CACHE_ENABLED
           value: "true"
         - name: CACHE_REDIS
